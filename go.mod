@@ -1,4 +1,4 @@
-module github.com/wasmvision/go-wasmvision-sdk/platform
+module github.com/wasmvision/wasmvision-sdk-go
 
 go 1.22.0
 
