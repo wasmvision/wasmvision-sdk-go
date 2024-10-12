@@ -10,16 +10,21 @@ import (
 // ConfigError represents the enum "wasmvision:platform/config#config-error".
 //
 //	enum config-error {
+//		success,
 //		no-such-key
 //	}
 type ConfigError uint8
 
 const (
+	// success, all is well.
+	ConfigErrorSuccess ConfigError = iota
+
 	// The requested key does not exist in the configuration.
-	ConfigErrorNoSuchKey ConfigError = iota
+	ConfigErrorNoSuchKey
 )
 
-var stringsConfigError = [1]string{
+var stringsConfigError = [2]string{
+	"success",
 	"no-such-key",
 }
 
@@ -38,7 +43,3 @@ func GetConfig(key string) (result cm.Result[string, string, ConfigError]) {
 	wasmimport_GetConfig((*uint8)(key0), (uint32)(key1), &result)
 	return
 }
-
-//go:wasmimport wasmvision:platform/config get-config
-//go:noescape
-func wasmimport_GetConfig(key0 *uint8, key1 uint32, result *cm.Result[string, string, ConfigError])

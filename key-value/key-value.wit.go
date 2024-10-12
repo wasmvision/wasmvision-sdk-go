@@ -25,10 +25,6 @@ func (self Store) ResourceDrop() {
 	return
 }
 
-//go:wasmimport wasmvision:platform/key-value [resource-drop]store
-//go:noescape
-func wasmimport_StoreResourceDrop(self0 uint32)
-
 // StoreOpen represents the imported static function "open".
 //
 // Open the store with the specified label.
@@ -46,10 +42,6 @@ func StoreOpen(label string) (result cm.Result[ErrorShape, Store, Error]) {
 	return
 }
 
-//go:wasmimport wasmvision:platform/key-value [static]store.open
-//go:noescape
-func wasmimport_StoreOpen(label0 *uint8, label1 uint32, result *cm.Result[ErrorShape, Store, Error])
-
 // Delete represents the imported method "delete".
 //
 // Delete the tuple with the specified `key`
@@ -66,10 +58,6 @@ func (self Store) Delete(key string) (result cm.Result[Error, struct{}, Error]) 
 	return
 }
 
-//go:wasmimport wasmvision:platform/key-value [method]store.delete
-//go:noescape
-func wasmimport_StoreDelete(self0 uint32, key0 *uint8, key1 uint32, result *cm.Result[Error, struct{}, Error])
-
 // Exists represents the imported method "exists".
 //
 // Return whether a tuple exists for the specified `key`
@@ -83,10 +71,6 @@ func (self Store) Exists(key string) (result cm.Result[ErrorShape, bool, Error])
 	wasmimport_StoreExists((uint32)(self0), (*uint8)(key0), (uint32)(key1), &result)
 	return
 }
-
-//go:wasmimport wasmvision:platform/key-value [method]store.exists
-//go:noescape
-func wasmimport_StoreExists(self0 uint32, key0 *uint8, key1 uint32, result *cm.Result[ErrorShape, bool, Error])
 
 // Get represents the imported method "get".
 //
@@ -104,10 +88,6 @@ func (self Store) Get(key string) (result cm.Result[OptionListU8Shape, cm.Option
 	return
 }
 
-//go:wasmimport wasmvision:platform/key-value [method]store.get
-//go:noescape
-func wasmimport_StoreGet(self0 uint32, key0 *uint8, key1 uint32, result *cm.Result[OptionListU8Shape, cm.Option[cm.List[uint8]], Error])
-
 // GetKeys represents the imported method "get-keys".
 //
 // Return a list of all the keys
@@ -120,10 +100,6 @@ func (self Store) GetKeys() (result cm.Result[ErrorShape, cm.List[string], Error
 	wasmimport_StoreGetKeys((uint32)(self0), &result)
 	return
 }
-
-//go:wasmimport wasmvision:platform/key-value [method]store.get-keys
-//go:noescape
-func wasmimport_StoreGetKeys(self0 uint32, result *cm.Result[ErrorShape, cm.List[string], Error])
 
 // Set represents the imported method "set".
 //
@@ -139,10 +115,6 @@ func (self Store) Set(key string, value cm.List[uint8]) (result cm.Result[Error,
 	wasmimport_StoreSet((uint32)(self0), (*uint8)(key0), (uint32)(key1), (*uint8)(value0), (uint32)(value1), &result)
 	return
 }
-
-//go:wasmimport wasmvision:platform/key-value [method]store.set
-//go:noescape
-func wasmimport_StoreSet(self0 uint32, key0 *uint8, key1 uint32, value0 *uint8, value1 uint32, result *cm.Result[Error, struct{}, Error])
 
 // Error represents the variant "wasmvision:platform/key-value#error".
 //

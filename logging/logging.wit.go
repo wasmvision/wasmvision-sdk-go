@@ -20,10 +20,6 @@ func Log(msg string) {
 	return
 }
 
-//go:wasmimport wasmvision:platform/logging log
-//go:noescape
-func wasmimport_Log(msg0 *uint8, msg1 uint32)
-
 // Println represents the imported function "println".
 //
 // Print a message on the host.
@@ -36,7 +32,3 @@ func Println(msg string) {
 	wasmimport_Println((*uint8)(msg0), (uint32)(msg1))
 	return
 }
-
-//go:wasmimport wasmvision:platform/logging println
-//go:noescape
-func wasmimport_Println(msg0 *uint8, msg1 uint32)

@@ -58,10 +58,6 @@ func Get(url string) (result cm.Result[cm.List[uint8], cm.List[uint8], HTTPError
 	return
 }
 
-//go:wasmimport wasmvision:platform/http get
-//go:noescape
-func wasmimport_Get(url0 *uint8, url1 uint32, result *cm.Result[cm.List[uint8], cm.List[uint8], HTTPError])
-
 // Post represents the imported function "post".
 //
 // Post the content to the specified URL.
@@ -78,7 +74,3 @@ func Post(url string, contentType string, body cm.List[uint8]) (result cm.Result
 	wasmimport_Post((*uint8)(url0), (uint32)(url1), (*uint8)(contentType0), (uint32)(contentType1), (*uint8)(body0), (uint32)(body1), &result)
 	return
 }
-
-//go:wasmimport wasmvision:platform/http post
-//go:noescape
-func wasmimport_Post(url0 *uint8, url1 uint32, contentType0 *uint8, contentType1 uint32, body0 *uint8, body1 uint32, result *cm.Result[cm.List[uint8], cm.List[uint8], HTTPError])
