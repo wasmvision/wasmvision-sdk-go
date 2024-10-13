@@ -5,13 +5,15 @@ package time
 
 // Now represents the imported function "now".
 //
-// Get the current time in milliseconds since the Unix epoch.
+// Get the current time in milliseconds since the Unix epoch. Use 0 for the `tz` parameter
+// for now.
 //
-//	now: func() -> u64
+//	now: func(tz: u32) -> u64
 //
 //go:nosplit
-func Now() (result uint64) {
-	result0 := wasmimport_Now()
+func Now(tz uint32) (result uint64) {
+	tz0 := (uint32)(tz)
+	result0 := wasmimport_Now((uint32)(tz0))
 	result = (uint64)((uint64)(result0))
 	return
 }

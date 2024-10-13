@@ -39,8 +39,9 @@ interface logging {
 }
 
 interface time {
-	/// Get the current time in milliseconds since the Unix epoch.
-	now: func() -> u64;
+	/// Get the current time in milliseconds since the Unix epoch. Use 0 for the `tz`
+	/// parameter for now.
+	now: func(tz: u32) -> u64;
 }
 
 /// wasmvision is a WebAssembly guest module interface for host functions provided

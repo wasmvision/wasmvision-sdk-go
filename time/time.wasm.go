@@ -6,4 +6,4 @@ package time
 
 //go:wasmimport wasmvision:platform/time now
 //go:noescape
-func wasmimport_Now() (result0 uint64)
+func wasmimport_Now(tz0 uint32) (result0 uint64)
