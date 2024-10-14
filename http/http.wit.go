@@ -74,3 +74,30 @@ func Post(url string, contentType string, body cm.List[uint8]) (result cm.Result
 	wasmimport_Post((*uint8)(url0), (uint32)(url1), (*uint8)(contentType0), (uint32)(contentType1), (*uint8)(body0), (uint32)(body1), &result)
 	return
 }
+
+// PostImage represents the imported function "post-image".
+//
+// Post the image to the specified URL.
+// Template is the template to use to send the image.
+// If the content-type is image/jpeg or image/png, the template is ignored, and the
+// image is simply converted and sent in that format.
+// Otherwise, the template is used to convert the image to the desired format using
+// simple substitution of the symbol %IMAGE%
+// after base64 encoding the image.
+// The response-item is the item in the response to return. Usually this will be a
+// JSON element that will be parsed.
+// Mat is the reference to to the Mat to use.
+//
+//	post-image: func(url: string, content-type: string, request-template: list<u8>,
+//	response-item: string, mat: u32) -> result<list<u8>, http-error>
+//
+//go:nosplit
+func PostImage(url string, contentType string, requestTemplate cm.List[uint8], responseItem string, mat uint32) (result cm.Result[cm.List[uint8], cm.List[uint8], HTTPError]) {
+	url0, url1 := cm.LowerString(url)
+	contentType0, contentType1 := cm.LowerString(contentType)
+	requestTemplate0, requestTemplate1 := cm.LowerList(requestTemplate)
+	responseItem0, responseItem1 := cm.LowerString(responseItem)
+	mat0 := (uint32)(mat)
+	wasmimport_PostImage((*uint8)(url0), (uint32)(url1), (*uint8)(contentType0), (uint32)(contentType1), (*uint8)(requestTemplate0), (uint32)(requestTemplate1), (*uint8)(responseItem0), (uint32)(responseItem1), (uint32)(mat0), &result)
+	return
+}
