@@ -8,6 +8,22 @@ package logging
 //go:noescape
 func wasmimport_Log(msg0 *uint8, msg1 uint32)
 
+//go:wasmimport wasmvision:platform/logging error
+//go:noescape
+func wasmimport_Error(msg0 *uint8, msg1 uint32)
+
+//go:wasmimport wasmvision:platform/logging warn
+//go:noescape
+func wasmimport_Warn(msg0 *uint8, msg1 uint32)
+
+//go:wasmimport wasmvision:platform/logging info
+//go:noescape
+func wasmimport_Info(msg0 *uint8, msg1 uint32)
+
+//go:wasmimport wasmvision:platform/logging debug
+//go:noescape
+func wasmimport_Debug(msg0 *uint8, msg1 uint32)
+
 //go:wasmimport wasmvision:platform/logging println
 //go:noescape
 func wasmimport_Println(msg0 *uint8, msg1 uint32)
