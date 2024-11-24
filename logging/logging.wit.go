@@ -4,7 +4,7 @@
 package logging
 
 import (
-	"github.com/bytecodealliance/wasm-tools-go/cm"
+	"go.bytecodealliance.org/cm"
 )
 
 // Log represents the imported function "log".

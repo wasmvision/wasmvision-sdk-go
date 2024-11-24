@@ -4,7 +4,7 @@
 package config
 
 import (
-	"github.com/bytecodealliance/wasm-tools-go/cm"
+	"go.bytecodealliance.org/cm"
 )
 
 // ConfigError represents the enum "wasmvision:platform/config#config-error".

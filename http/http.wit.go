@@ -4,7 +4,7 @@
 package http
 
 import (
-	"github.com/bytecodealliance/wasm-tools-go/cm"
+	"go.bytecodealliance.org/cm"
 )
 
 // HTTPError represents the enum "wasmvision:platform/http#http-error".
