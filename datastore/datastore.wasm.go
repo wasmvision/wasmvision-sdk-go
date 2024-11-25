@@ -8,58 +8,58 @@ import (
 
 // This file contains wasmimport and wasmexport declarations for "wasmvision:platform".
 
-//go:wasmimport wasmvision:platform/datastore [resource-drop]framedata
+//go:wasmimport wasmvision:platform/datastore [resource-drop]frame-store
 //go:noescape
-func wasmimport_FramedataResourceDrop(self0 uint32)
+func wasmimport_FrameStoreResourceDrop(self0 uint32)
 
-//go:wasmimport wasmvision:platform/datastore [static]framedata.open
+//go:wasmimport wasmvision:platform/datastore [constructor]frame-store
 //go:noescape
-func wasmimport_FramedataOpen(frame0 uint32, result *cm.Result[Framedata, Framedata, DatastoreError])
+func wasmimport_NewFrameStore(id0 uint32) (result0 uint32)
 
-//go:wasmimport wasmvision:platform/datastore [method]framedata.delete
+//go:wasmimport wasmvision:platform/datastore [method]frame-store.delete
 //go:noescape
-func wasmimport_FramedataDelete(self0 uint32, key0 *uint8, key1 uint32, result *cm.Result[DatastoreError, struct{}, DatastoreError])
+func wasmimport_FrameStoreDelete(self0 uint32, frame0 uint32, key0 *uint8, key1 uint32, result *cm.Result[DatastoreError, struct{}, DatastoreError])
 
-//go:wasmimport wasmvision:platform/datastore [method]framedata.exists
+//go:wasmimport wasmvision:platform/datastore [method]frame-store.exists
 //go:noescape
-func wasmimport_FramedataExists(self0 uint32, key0 *uint8, key1 uint32, result *cm.Result[bool, bool, DatastoreError])
+func wasmimport_FrameStoreExists(self0 uint32, frame0 uint32, key0 *uint8, key1 uint32, result *cm.Result[bool, bool, DatastoreError])
 
-//go:wasmimport wasmvision:platform/datastore [method]framedata.get
+//go:wasmimport wasmvision:platform/datastore [method]frame-store.get
 //go:noescape
-func wasmimport_FramedataGet(self0 uint32, key0 *uint8, key1 uint32, result *cm.Result[cm.List[uint8], cm.List[uint8], DatastoreError])
+func wasmimport_FrameStoreGet(self0 uint32, frame0 uint32, key0 *uint8, key1 uint32, result *cm.Result[cm.List[uint8], cm.List[uint8], DatastoreError])
 
-//go:wasmimport wasmvision:platform/datastore [method]framedata.get-keys
+//go:wasmimport wasmvision:platform/datastore [method]frame-store.get-keys
 //go:noescape
-func wasmimport_FramedataGetKeys(self0 uint32, result *cm.Result[cm.List[string], cm.List[string], DatastoreError])
+func wasmimport_FrameStoreGetKeys(self0 uint32, frame0 uint32, result *cm.Result[cm.List[string], cm.List[string], DatastoreError])
 
-//go:wasmimport wasmvision:platform/datastore [method]framedata.set
+//go:wasmimport wasmvision:platform/datastore [method]frame-store.set
 //go:noescape
-func wasmimport_FramedataSet(self0 uint32, key0 *uint8, key1 uint32, value0 *uint8, value1 uint32, result *cm.Result[DatastoreError, struct{}, DatastoreError])
+func wasmimport_FrameStoreSet(self0 uint32, frame0 uint32, key0 *uint8, key1 uint32, value0 *uint8, value1 uint32, result *cm.Result[DatastoreError, struct{}, DatastoreError])
 
-//go:wasmimport wasmvision:platform/datastore [resource-drop]processordata
+//go:wasmimport wasmvision:platform/datastore [resource-drop]processor-store
 //go:noescape
-func wasmimport_ProcessordataResourceDrop(self0 uint32)
+func wasmimport_ProcessorStoreResourceDrop(self0 uint32)
 
-//go:wasmimport wasmvision:platform/datastore [static]processordata.open
+//go:wasmimport wasmvision:platform/datastore [constructor]processor-store
 //go:noescape
-func wasmimport_ProcessordataOpen(processor0 *uint8, processor1 uint32, result *cm.Result[Processordata, Processordata, DatastoreError])
+func wasmimport_NewProcessorStore(id0 uint32) (result0 uint32)
 
-//go:wasmimport wasmvision:platform/datastore [method]processordata.delete
+//go:wasmimport wasmvision:platform/datastore [method]processor-store.delete
 //go:noescape
-func wasmimport_ProcessordataDelete(self0 uint32, key0 *uint8, key1 uint32, result *cm.Result[DatastoreError, struct{}, DatastoreError])
+func wasmimport_ProcessorStoreDelete(self0 uint32, processor0 *uint8, processor1 uint32, key0 *uint8, key1 uint32, result *cm.Result[DatastoreError, struct{}, DatastoreError])
 
-//go:wasmimport wasmvision:platform/datastore [method]processordata.exists
+//go:wasmimport wasmvision:platform/datastore [method]processor-store.exists
 //go:noescape
-func wasmimport_ProcessordataExists(self0 uint32, key0 *uint8, key1 uint32, result *cm.Result[bool, bool, DatastoreError])
+func wasmimport_ProcessorStoreExists(self0 uint32, processor0 *uint8, processor1 uint32, key0 *uint8, key1 uint32, result *cm.Result[bool, bool, DatastoreError])
 
-//go:wasmimport wasmvision:platform/datastore [method]processordata.get
+//go:wasmimport wasmvision:platform/datastore [method]processor-store.get
 //go:noescape
-func wasmimport_ProcessordataGet(self0 uint32, key0 *uint8, key1 uint32, result *cm.Result[cm.List[uint8], cm.List[uint8], DatastoreError])
+func wasmimport_ProcessorStoreGet(self0 uint32, processor0 *uint8, processor1 uint32, key0 *uint8, key1 uint32, result *cm.Result[cm.List[uint8], cm.List[uint8], DatastoreError])
 
-//go:wasmimport wasmvision:platform/datastore [method]processordata.get-keys
+//go:wasmimport wasmvision:platform/datastore [method]processor-store.get-keys
 //go:noescape
-func wasmimport_ProcessordataGetKeys(self0 uint32, result *cm.Result[cm.List[string], cm.List[string], DatastoreError])
+func wasmimport_ProcessorStoreGetKeys(self0 uint32, processor0 *uint8, processor1 uint32, result *cm.Result[cm.List[string], cm.List[string], DatastoreError])
 
-//go:wasmimport wasmvision:platform/datastore [method]processordata.set
+//go:wasmimport wasmvision:platform/datastore [method]processor-store.set
 //go:noescape
-func wasmimport_ProcessordataSet(self0 uint32, key0 *uint8, key1 uint32, value0 *uint8, value1 uint32, result *cm.Result[DatastoreError, struct{}, DatastoreError])
+func wasmimport_ProcessorStoreSet(self0 uint32, processor0 *uint8, processor1 uint32, key0 *uint8, key1 uint32, value0 *uint8, value1 uint32, result *cm.Result[DatastoreError, struct{}, DatastoreError])

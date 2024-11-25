@@ -7,218 +7,6 @@ import (
 	"go.bytecodealliance.org/cm"
 )
 
-// Framedata represents the imported resource "wasmvision:platform/datastore#framedata".
-//
-// An open key-value store
-//
-//	resource framedata
-type Framedata cm.Resource
-
-// ResourceDrop represents the imported resource-drop for resource "framedata".
-//
-// Drops a resource handle.
-//
-//go:nosplit
-func (self Framedata) ResourceDrop() {
-	self0 := cm.Reinterpret[uint32](self)
-	wasmimport_FramedataResourceDrop((uint32)(self0))
-	return
-}
-
-// FramedataOpen represents the imported static function "open".
-//
-// Open the frame datastore for the specified frame.
-//
-// `error::no-such-store` will be raised if the `frame` is not recognized.
-//
-//	open: static func(frame: u32) -> result<framedata, datastore-error>
-//
-//go:nosplit
-func FramedataOpen(frame uint32) (result cm.Result[Framedata, Framedata, DatastoreError]) {
-	frame0 := (uint32)(frame)
-	wasmimport_FramedataOpen((uint32)(frame0), &result)
-	return
-}
-
-// Delete represents the imported method "delete".
-//
-// Delete the tuple with the specified `key`
-//
-// No error is raised if a tuple did not previously exist for `key`.
-//
-//	delete: func(key: string) -> result<_, datastore-error>
-//
-//go:nosplit
-func (self Framedata) Delete(key string) (result cm.Result[DatastoreError, struct{}, DatastoreError]) {
-	self0 := cm.Reinterpret[uint32](self)
-	key0, key1 := cm.LowerString(key)
-	wasmimport_FramedataDelete((uint32)(self0), (*uint8)(key0), (uint32)(key1), &result)
-	return
-}
-
-// Exists represents the imported method "exists".
-//
-// Return whether a tuple exists for the specified `key`
-//
-//	exists: func(key: string) -> result<bool, datastore-error>
-//
-//go:nosplit
-func (self Framedata) Exists(key string) (result cm.Result[bool, bool, DatastoreError]) {
-	self0 := cm.Reinterpret[uint32](self)
-	key0, key1 := cm.LowerString(key)
-	wasmimport_FramedataExists((uint32)(self0), (*uint8)(key0), (uint32)(key1), &result)
-	return
-}
-
-// Get represents the imported method "get".
-//
-// Get the value associated with the specified `key`
-//
-// Returns `ok(none)` if the key does not exist.
-//
-//	get: func(key: string) -> result<list<u8>, datastore-error>
-//
-//go:nosplit
-func (self Framedata) Get(key string) (result cm.Result[cm.List[uint8], cm.List[uint8], DatastoreError]) {
-	self0 := cm.Reinterpret[uint32](self)
-	key0, key1 := cm.LowerString(key)
-	wasmimport_FramedataGet((uint32)(self0), (*uint8)(key0), (uint32)(key1), &result)
-	return
-}
-
-// GetKeys represents the imported method "get-keys".
-//
-// Return a list of all the keys
-//
-//	get-keys: func() -> result<list<string>, datastore-error>
-//
-//go:nosplit
-func (self Framedata) GetKeys() (result cm.Result[cm.List[string], cm.List[string], DatastoreError]) {
-	self0 := cm.Reinterpret[uint32](self)
-	wasmimport_FramedataGetKeys((uint32)(self0), &result)
-	return
-}
-
-// Set represents the imported method "set".
-//
-// Set the `value` associated with the specified `key` overwriting any existing value.
-//
-//	set: func(key: string, value: list<u8>) -> result<_, datastore-error>
-//
-//go:nosplit
-func (self Framedata) Set(key string, value cm.List[uint8]) (result cm.Result[DatastoreError, struct{}, DatastoreError]) {
-	self0 := cm.Reinterpret[uint32](self)
-	key0, key1 := cm.LowerString(key)
-	value0, value1 := cm.LowerList(value)
-	wasmimport_FramedataSet((uint32)(self0), (*uint8)(key0), (uint32)(key1), (*uint8)(value0), (uint32)(value1), &result)
-	return
-}
-
-// Processordata represents the imported resource "wasmvision:platform/datastore#processordata".
-//
-//	resource processordata
-type Processordata cm.Resource
-
-// ResourceDrop represents the imported resource-drop for resource "processordata".
-//
-// Drops a resource handle.
-//
-//go:nosplit
-func (self Processordata) ResourceDrop() {
-	self0 := cm.Reinterpret[uint32](self)
-	wasmimport_ProcessordataResourceDrop((uint32)(self0))
-	return
-}
-
-// ProcessordataOpen represents the imported static function "open".
-//
-// # Open the processor datastore for the specified processor
-//
-// `error::no-such-store` will be raised if the `processor` is not recognized.
-//
-//	open: static func(processor: string) -> result<processordata, datastore-error>
-//
-//go:nosplit
-func ProcessordataOpen(processor string) (result cm.Result[Processordata, Processordata, DatastoreError]) {
-	processor0, processor1 := cm.LowerString(processor)
-	wasmimport_ProcessordataOpen((*uint8)(processor0), (uint32)(processor1), &result)
-	return
-}
-
-// Delete represents the imported method "delete".
-//
-// Delete the tuple with the specified `key`
-//
-// No error is raised if a tuple did not previously exist for `key`.
-//
-//	delete: func(key: string) -> result<_, datastore-error>
-//
-//go:nosplit
-func (self Processordata) Delete(key string) (result cm.Result[DatastoreError, struct{}, DatastoreError]) {
-	self0 := cm.Reinterpret[uint32](self)
-	key0, key1 := cm.LowerString(key)
-	wasmimport_ProcessordataDelete((uint32)(self0), (*uint8)(key0), (uint32)(key1), &result)
-	return
-}
-
-// Exists represents the imported method "exists".
-//
-// Return whether a tuple exists for the specified `key`
-//
-//	exists: func(key: string) -> result<bool, datastore-error>
-//
-//go:nosplit
-func (self Processordata) Exists(key string) (result cm.Result[bool, bool, DatastoreError]) {
-	self0 := cm.Reinterpret[uint32](self)
-	key0, key1 := cm.LowerString(key)
-	wasmimport_ProcessordataExists((uint32)(self0), (*uint8)(key0), (uint32)(key1), &result)
-	return
-}
-
-// Get represents the imported method "get".
-//
-// Get the value associated with the specified `key`
-//
-// Returns `ok(none)` if the key does not exist.
-//
-//	get: func(key: string) -> result<list<u8>, datastore-error>
-//
-//go:nosplit
-func (self Processordata) Get(key string) (result cm.Result[cm.List[uint8], cm.List[uint8], DatastoreError]) {
-	self0 := cm.Reinterpret[uint32](self)
-	key0, key1 := cm.LowerString(key)
-	wasmimport_ProcessordataGet((uint32)(self0), (*uint8)(key0), (uint32)(key1), &result)
-	return
-}
-
-// GetKeys represents the imported method "get-keys".
-//
-// Return a list of all the keys
-//
-//	get-keys: func() -> result<list<string>, datastore-error>
-//
-//go:nosplit
-func (self Processordata) GetKeys() (result cm.Result[cm.List[string], cm.List[string], DatastoreError]) {
-	self0 := cm.Reinterpret[uint32](self)
-	wasmimport_ProcessordataGetKeys((uint32)(self0), &result)
-	return
-}
-
-// Set represents the imported method "set".
-//
-// Set the `value` associated with the specified `key` overwriting any existing value.
-//
-//	set: func(key: string, value: list<u8>) -> result<_, datastore-error>
-//
-//go:nosplit
-func (self Processordata) Set(key string, value cm.List[uint8]) (result cm.Result[DatastoreError, struct{}, DatastoreError]) {
-	self0 := cm.Reinterpret[uint32](self)
-	key0, key1 := cm.LowerString(key)
-	value0, value1 := cm.LowerList(value)
-	wasmimport_ProcessordataSet((uint32)(self0), (*uint8)(key0), (uint32)(key1), (*uint8)(value0), (uint32)(value1), &result)
-	return
-}
-
 // DatastoreError represents the enum "wasmvision:platform/datastore#datastore-error".
 //
 // datastore errors returned by the runtime.
@@ -245,4 +33,226 @@ var stringsDatastoreError = [3]string{
 // String implements [fmt.Stringer], returning the enum case name of e.
 func (e DatastoreError) String() string {
 	return stringsDatastoreError[e]
+}
+
+// FrameStore represents the imported resource "wasmvision:platform/datastore#frame-store".
+//
+// frame-store is the interface for storing data associated with a specific frame.
+//
+//	resource frame-store
+type FrameStore cm.Resource
+
+// ResourceDrop represents the imported resource-drop for resource "frame-store".
+//
+// Drops a resource handle.
+//
+//go:nosplit
+func (self FrameStore) ResourceDrop() {
+	self0 := cm.Reinterpret[uint32](self)
+	wasmimport_FrameStoreResourceDrop((uint32)(self0))
+	return
+}
+
+// NewFrameStore represents the imported constructor for resource "frame-store".
+//
+// The id param is currently ignored
+//
+//	constructor(id: u32)
+//
+//go:nosplit
+func NewFrameStore(id uint32) (result FrameStore) {
+	id0 := (uint32)(id)
+	result0 := wasmimport_NewFrameStore((uint32)(id0))
+	result = cm.Reinterpret[FrameStore]((uint32)(result0))
+	return
+}
+
+// Delete represents the imported method "delete".
+//
+// Delete the tuple with the specified `key`
+//
+// No error is raised if a tuple did not previously exist for `key`.
+//
+//	delete: func(frame: u32, key: string) -> result<_, datastore-error>
+//
+//go:nosplit
+func (self FrameStore) Delete(frame uint32, key string) (result cm.Result[DatastoreError, struct{}, DatastoreError]) {
+	self0 := cm.Reinterpret[uint32](self)
+	frame0 := (uint32)(frame)
+	key0, key1 := cm.LowerString(key)
+	wasmimport_FrameStoreDelete((uint32)(self0), (uint32)(frame0), (*uint8)(key0), (uint32)(key1), &result)
+	return
+}
+
+// Exists represents the imported method "exists".
+//
+// Return whether a tuple exists for the specified `key`
+//
+//	exists: func(frame: u32, key: string) -> result<bool, datastore-error>
+//
+//go:nosplit
+func (self FrameStore) Exists(frame uint32, key string) (result cm.Result[bool, bool, DatastoreError]) {
+	self0 := cm.Reinterpret[uint32](self)
+	frame0 := (uint32)(frame)
+	key0, key1 := cm.LowerString(key)
+	wasmimport_FrameStoreExists((uint32)(self0), (uint32)(frame0), (*uint8)(key0), (uint32)(key1), &result)
+	return
+}
+
+// Get represents the imported method "get".
+//
+// Get the value associated with the specified `key`
+//
+// Returns `ok(none)` if the key does not exist.
+//
+//	get: func(frame: u32, key: string) -> result<list<u8>, datastore-error>
+//
+//go:nosplit
+func (self FrameStore) Get(frame uint32, key string) (result cm.Result[cm.List[uint8], cm.List[uint8], DatastoreError]) {
+	self0 := cm.Reinterpret[uint32](self)
+	frame0 := (uint32)(frame)
+	key0, key1 := cm.LowerString(key)
+	wasmimport_FrameStoreGet((uint32)(self0), (uint32)(frame0), (*uint8)(key0), (uint32)(key1), &result)
+	return
+}
+
+// GetKeys represents the imported method "get-keys".
+//
+// Return a list of all the keys
+//
+//	get-keys: func(frame: u32) -> result<list<string>, datastore-error>
+//
+//go:nosplit
+func (self FrameStore) GetKeys(frame uint32) (result cm.Result[cm.List[string], cm.List[string], DatastoreError]) {
+	self0 := cm.Reinterpret[uint32](self)
+	frame0 := (uint32)(frame)
+	wasmimport_FrameStoreGetKeys((uint32)(self0), (uint32)(frame0), &result)
+	return
+}
+
+// Set represents the imported method "set".
+//
+// Set the `value` associated with the specified `key` overwriting any existing value.
+//
+//	set: func(frame: u32, key: string, value: list<u8>) -> result<_, datastore-error>
+//
+//go:nosplit
+func (self FrameStore) Set(frame uint32, key string, value cm.List[uint8]) (result cm.Result[DatastoreError, struct{}, DatastoreError]) {
+	self0 := cm.Reinterpret[uint32](self)
+	frame0 := (uint32)(frame)
+	key0, key1 := cm.LowerString(key)
+	value0, value1 := cm.LowerList(value)
+	wasmimport_FrameStoreSet((uint32)(self0), (uint32)(frame0), (*uint8)(key0), (uint32)(key1), (*uint8)(value0), (uint32)(value1), &result)
+	return
+}
+
+// ProcessorStore represents the imported resource "wasmvision:platform/datastore#processor-store".
+//
+// processor-store is the interface for storing data associated with a processor.
+//
+//	resource processor-store
+type ProcessorStore cm.Resource
+
+// ResourceDrop represents the imported resource-drop for resource "processor-store".
+//
+// Drops a resource handle.
+//
+//go:nosplit
+func (self ProcessorStore) ResourceDrop() {
+	self0 := cm.Reinterpret[uint32](self)
+	wasmimport_ProcessorStoreResourceDrop((uint32)(self0))
+	return
+}
+
+// NewProcessorStore represents the imported constructor for resource "processor-store".
+//
+// The id param is currently ignored
+//
+//	constructor(id: u32)
+//
+//go:nosplit
+func NewProcessorStore(id uint32) (result ProcessorStore) {
+	id0 := (uint32)(id)
+	result0 := wasmimport_NewProcessorStore((uint32)(id0))
+	result = cm.Reinterpret[ProcessorStore]((uint32)(result0))
+	return
+}
+
+// Delete represents the imported method "delete".
+//
+// Delete the tuple with the specified `key`
+//
+// No error is raised if a tuple did not previously exist for `key`.
+//
+//	delete: func(processor: string, key: string) -> result<_, datastore-error>
+//
+//go:nosplit
+func (self ProcessorStore) Delete(processor string, key string) (result cm.Result[DatastoreError, struct{}, DatastoreError]) {
+	self0 := cm.Reinterpret[uint32](self)
+	processor0, processor1 := cm.LowerString(processor)
+	key0, key1 := cm.LowerString(key)
+	wasmimport_ProcessorStoreDelete((uint32)(self0), (*uint8)(processor0), (uint32)(processor1), (*uint8)(key0), (uint32)(key1), &result)
+	return
+}
+
+// Exists represents the imported method "exists".
+//
+// Return whether a tuple exists for the specified `key`
+//
+//	exists: func(processor: string, key: string) -> result<bool, datastore-error>
+//
+//go:nosplit
+func (self ProcessorStore) Exists(processor string, key string) (result cm.Result[bool, bool, DatastoreError]) {
+	self0 := cm.Reinterpret[uint32](self)
+	processor0, processor1 := cm.LowerString(processor)
+	key0, key1 := cm.LowerString(key)
+	wasmimport_ProcessorStoreExists((uint32)(self0), (*uint8)(processor0), (uint32)(processor1), (*uint8)(key0), (uint32)(key1), &result)
+	return
+}
+
+// Get represents the imported method "get".
+//
+// Get the value associated with the specified `key`
+//
+// Returns `ok(none)` if the key does not exist.
+//
+//	get: func(processor: string, key: string) -> result<list<u8>, datastore-error>
+//
+//go:nosplit
+func (self ProcessorStore) Get(processor string, key string) (result cm.Result[cm.List[uint8], cm.List[uint8], DatastoreError]) {
+	self0 := cm.Reinterpret[uint32](self)
+	processor0, processor1 := cm.LowerString(processor)
+	key0, key1 := cm.LowerString(key)
+	wasmimport_ProcessorStoreGet((uint32)(self0), (*uint8)(processor0), (uint32)(processor1), (*uint8)(key0), (uint32)(key1), &result)
+	return
+}
+
+// GetKeys represents the imported method "get-keys".
+//
+// Return a list of all the keys
+//
+//	get-keys: func(processor: string) -> result<list<string>, datastore-error>
+//
+//go:nosplit
+func (self ProcessorStore) GetKeys(processor string) (result cm.Result[cm.List[string], cm.List[string], DatastoreError]) {
+	self0 := cm.Reinterpret[uint32](self)
+	processor0, processor1 := cm.LowerString(processor)
+	wasmimport_ProcessorStoreGetKeys((uint32)(self0), (*uint8)(processor0), (uint32)(processor1), &result)
+	return
+}
+
+// Set represents the imported method "set".
+//
+// Set the `value` associated with the specified `key` overwriting any existing value.
+//
+//	set: func(processor: string, key: string, value: list<u8>) -> result<_, datastore-error>
+//
+//go:nosplit
+func (self ProcessorStore) Set(processor string, key string, value cm.List[uint8]) (result cm.Result[DatastoreError, struct{}, DatastoreError]) {
+	self0 := cm.Reinterpret[uint32](self)
+	processor0, processor1 := cm.LowerString(processor)
+	key0, key1 := cm.LowerString(key)
+	value0, value1 := cm.LowerList(value)
+	wasmimport_ProcessorStoreSet((uint32)(self0), (*uint8)(processor0), (uint32)(processor1), (*uint8)(key0), (uint32)(key1), (*uint8)(value0), (uint32)(value1), &result)
+	return
 }
