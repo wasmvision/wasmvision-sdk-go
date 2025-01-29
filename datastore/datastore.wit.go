@@ -24,7 +24,7 @@ const (
 	DatastoreErrorRuntimeError
 )
 
-var stringsDatastoreError = [3]string{
+var _DatastoreErrorStrings = [3]string{
 	"success",
 	"no-such-store",
 	"runtime-error",
@@ -32,8 +32,21 @@ var stringsDatastoreError = [3]string{
 
 // String implements [fmt.Stringer], returning the enum case name of e.
 func (e DatastoreError) String() string {
-	return stringsDatastoreError[e]
+	return _DatastoreErrorStrings[e]
 }
+
+// MarshalText implements [encoding.TextMarshaler].
+func (e DatastoreError) MarshalText() ([]byte, error) {
+	return []byte(e.String()), nil
+}
+
+// UnmarshalText implements [encoding.TextUnmarshaler], unmarshaling into an enum
+// case. Returns an error if the supplied text is not one of the enum cases.
+func (e *DatastoreError) UnmarshalText(text []byte) error {
+	return _DatastoreErrorUnmarshalCase(e, text)
+}
+
+var _DatastoreErrorUnmarshalCase = cm.CaseUnmarshaler[DatastoreError](_DatastoreErrorStrings[:])
 
 // FrameStore represents the imported resource "wasmvision:platform/datastore#frame-store".
 //
@@ -91,7 +104,7 @@ func (self FrameStore) Delete(frame uint32, key string) (result cm.Result[Datast
 //	exists: func(frame: u32, key: string) -> result<bool, datastore-error>
 //
 //go:nosplit
-func (self FrameStore) Exists(frame uint32, key string) (result cm.Result[bool, bool, DatastoreError]) {
+func (self FrameStore) Exists(frame uint32, key string) (result cm.Result[DatastoreError, bool, DatastoreError]) {
 	self0 := cm.Reinterpret[uint32](self)
 	frame0 := (uint32)(frame)
 	key0, key1 := cm.LowerString(key)
@@ -202,7 +215,7 @@ func (self ProcessorStore) Delete(processor string, key string) (result cm.Resul
 //	exists: func(processor: string, key: string) -> result<bool, datastore-error>
 //
 //go:nosplit
-func (self ProcessorStore) Exists(processor string, key string) (result cm.Result[bool, bool, DatastoreError]) {
+func (self ProcessorStore) Exists(processor string, key string) (result cm.Result[DatastoreError, bool, DatastoreError]) {
 	self0 := cm.Reinterpret[uint32](self)
 	processor0, processor1 := cm.LowerString(processor)
 	key0, key1 := cm.LowerString(key)

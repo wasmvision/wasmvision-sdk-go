@@ -22,7 +22,7 @@ func wasmimport_FrameStoreDelete(self0 uint32, frame0 uint32, key0 *uint8, key1 
 
 //go:wasmimport wasmvision:platform/datastore [method]frame-store.exists
 //go:noescape
-func wasmimport_FrameStoreExists(self0 uint32, frame0 uint32, key0 *uint8, key1 uint32, result *cm.Result[bool, bool, DatastoreError])
+func wasmimport_FrameStoreExists(self0 uint32, frame0 uint32, key0 *uint8, key1 uint32, result *cm.Result[DatastoreError, bool, DatastoreError])
 
 //go:wasmimport wasmvision:platform/datastore [method]frame-store.get
 //go:noescape
@@ -50,7 +50,7 @@ func wasmimport_ProcessorStoreDelete(self0 uint32, processor0 *uint8, processor1
 
 //go:wasmimport wasmvision:platform/datastore [method]processor-store.exists
 //go:noescape
-func wasmimport_ProcessorStoreExists(self0 uint32, processor0 *uint8, processor1 uint32, key0 *uint8, key1 uint32, result *cm.Result[bool, bool, DatastoreError])
+func wasmimport_ProcessorStoreExists(self0 uint32, processor0 *uint8, processor1 uint32, key0 *uint8, key1 uint32, result *cm.Result[DatastoreError, bool, DatastoreError])
 
 //go:wasmimport wasmvision:platform/datastore [method]processor-store.get
 //go:noescape

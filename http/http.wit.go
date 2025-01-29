@@ -30,7 +30,7 @@ const (
 	HTTPErrorTooManyRequests
 )
 
-var stringsHTTPError = [6]string{
+var _HTTPErrorStrings = [6]string{
 	"success",
 	"destination-not-allowed",
 	"invalid-url",
@@ -41,8 +41,21 @@ var stringsHTTPError = [6]string{
 
 // String implements [fmt.Stringer], returning the enum case name of e.
 func (e HTTPError) String() string {
-	return stringsHTTPError[e]
+	return _HTTPErrorStrings[e]
 }
+
+// MarshalText implements [encoding.TextMarshaler].
+func (e HTTPError) MarshalText() ([]byte, error) {
+	return []byte(e.String()), nil
+}
+
+// UnmarshalText implements [encoding.TextUnmarshaler], unmarshaling into an enum
+// case. Returns an error if the supplied text is not one of the enum cases.
+func (e *HTTPError) UnmarshalText(text []byte) error {
+	return _HTTPErrorUnmarshalCase(e, text)
+}
+
+var _HTTPErrorUnmarshalCase = cm.CaseUnmarshaler[HTTPError](_HTTPErrorStrings[:])
 
 // Get represents the imported function "get".
 //

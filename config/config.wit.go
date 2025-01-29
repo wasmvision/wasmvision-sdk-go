@@ -23,15 +23,28 @@ const (
 	ConfigErrorNoSuchKey
 )
 
-var stringsConfigError = [2]string{
+var _ConfigErrorStrings = [2]string{
 	"success",
 	"no-such-key",
 }
 
 // String implements [fmt.Stringer], returning the enum case name of e.
 func (e ConfigError) String() string {
-	return stringsConfigError[e]
+	return _ConfigErrorStrings[e]
 }
+
+// MarshalText implements [encoding.TextMarshaler].
+func (e ConfigError) MarshalText() ([]byte, error) {
+	return []byte(e.String()), nil
+}
+
+// UnmarshalText implements [encoding.TextUnmarshaler], unmarshaling into an enum
+// case. Returns an error if the supplied text is not one of the enum cases.
+func (e *ConfigError) UnmarshalText(text []byte) error {
+	return _ConfigErrorUnmarshalCase(e, text)
+}
+
+var _ConfigErrorUnmarshalCase = cm.CaseUnmarshaler[ConfigError](_ConfigErrorStrings[:])
 
 // GetConfig represents the imported function "get-config".
 //
