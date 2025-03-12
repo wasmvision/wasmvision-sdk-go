@@ -86,10 +86,10 @@ func NewFrameStore(id uint32) (result FrameStore) {
 //
 // No error is raised if a tuple did not previously exist for `key`.
 //
-//	delete: func(frame: u32, key: string) -> result<_, datastore-error>
+//	delete: func(frame: u32, key: string) -> result<bool, datastore-error>
 //
 //go:nosplit
-func (self FrameStore) Delete(frame uint32, key string) (result cm.Result[DatastoreError, struct{}, DatastoreError]) {
+func (self FrameStore) Delete(frame uint32, key string) (result cm.Result[DatastoreError, bool, DatastoreError]) {
 	self0 := cm.Reinterpret[uint32](self)
 	frame0 := (uint32)(frame)
 	key0, key1 := cm.LowerString(key)
@@ -147,10 +147,10 @@ func (self FrameStore) GetKeys(frame uint32) (result cm.Result[cm.List[string], 
 //
 // Set the `value` associated with the specified `key` overwriting any existing value.
 //
-//	set: func(frame: u32, key: string, value: list<u8>) -> result<_, datastore-error>
+//	set: func(frame: u32, key: string, value: list<u8>) -> result<bool, datastore-error>
 //
 //go:nosplit
-func (self FrameStore) Set(frame uint32, key string, value cm.List[uint8]) (result cm.Result[DatastoreError, struct{}, DatastoreError]) {
+func (self FrameStore) Set(frame uint32, key string, value cm.List[uint8]) (result cm.Result[DatastoreError, bool, DatastoreError]) {
 	self0 := cm.Reinterpret[uint32](self)
 	frame0 := (uint32)(frame)
 	key0, key1 := cm.LowerString(key)
@@ -197,10 +197,10 @@ func NewProcessorStore(id uint32) (result ProcessorStore) {
 //
 // No error is raised if a tuple did not previously exist for `key`.
 //
-//	delete: func(processor: string, key: string) -> result<_, datastore-error>
+//	delete: func(processor: string, key: string) -> result<bool, datastore-error>
 //
 //go:nosplit
-func (self ProcessorStore) Delete(processor string, key string) (result cm.Result[DatastoreError, struct{}, DatastoreError]) {
+func (self ProcessorStore) Delete(processor string, key string) (result cm.Result[DatastoreError, bool, DatastoreError]) {
 	self0 := cm.Reinterpret[uint32](self)
 	processor0, processor1 := cm.LowerString(processor)
 	key0, key1 := cm.LowerString(key)
@@ -258,10 +258,10 @@ func (self ProcessorStore) GetKeys(processor string) (result cm.Result[cm.List[s
 //
 // Set the `value` associated with the specified `key` overwriting any existing value.
 //
-//	set: func(processor: string, key: string, value: list<u8>) -> result<_, datastore-error>
+//	set: func(processor: string, key: string, value: list<u8>) -> result<bool, datastore-error>
 //
 //go:nosplit
-func (self ProcessorStore) Set(processor string, key string, value cm.List[uint8]) (result cm.Result[DatastoreError, struct{}, DatastoreError]) {
+func (self ProcessorStore) Set(processor string, key string, value cm.List[uint8]) (result cm.Result[DatastoreError, bool, DatastoreError]) {
 	self0 := cm.Reinterpret[uint32](self)
 	processor0, processor1 := cm.LowerString(processor)
 	key0, key1 := cm.LowerString(key)

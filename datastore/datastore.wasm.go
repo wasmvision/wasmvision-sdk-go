@@ -18,7 +18,7 @@ func wasmimport_NewFrameStore(id0 uint32) (result0 uint32)
 
 //go:wasmimport wasmvision:platform/datastore [method]frame-store.delete
 //go:noescape
-func wasmimport_FrameStoreDelete(self0 uint32, frame0 uint32, key0 *uint8, key1 uint32, result *cm.Result[DatastoreError, struct{}, DatastoreError])
+func wasmimport_FrameStoreDelete(self0 uint32, frame0 uint32, key0 *uint8, key1 uint32, result *cm.Result[DatastoreError, bool, DatastoreError])
 
 //go:wasmimport wasmvision:platform/datastore [method]frame-store.exists
 //go:noescape
@@ -34,7 +34,7 @@ func wasmimport_FrameStoreGetKeys(self0 uint32, frame0 uint32, result *cm.Result
 
 //go:wasmimport wasmvision:platform/datastore [method]frame-store.set
 //go:noescape
-func wasmimport_FrameStoreSet(self0 uint32, frame0 uint32, key0 *uint8, key1 uint32, value0 *uint8, value1 uint32, result *cm.Result[DatastoreError, struct{}, DatastoreError])
+func wasmimport_FrameStoreSet(self0 uint32, frame0 uint32, key0 *uint8, key1 uint32, value0 *uint8, value1 uint32, result *cm.Result[DatastoreError, bool, DatastoreError])
 
 //go:wasmimport wasmvision:platform/datastore [resource-drop]processor-store
 //go:noescape
@@ -46,7 +46,7 @@ func wasmimport_NewProcessorStore(id0 uint32) (result0 uint32)
 
 //go:wasmimport wasmvision:platform/datastore [method]processor-store.delete
 //go:noescape
-func wasmimport_ProcessorStoreDelete(self0 uint32, processor0 *uint8, processor1 uint32, key0 *uint8, key1 uint32, result *cm.Result[DatastoreError, struct{}, DatastoreError])
+func wasmimport_ProcessorStoreDelete(self0 uint32, processor0 *uint8, processor1 uint32, key0 *uint8, key1 uint32, result *cm.Result[DatastoreError, bool, DatastoreError])
 
 //go:wasmimport wasmvision:platform/datastore [method]processor-store.exists
 //go:noescape
@@ -62,4 +62,4 @@ func wasmimport_ProcessorStoreGetKeys(self0 uint32, processor0 *uint8, processor
 
 //go:wasmimport wasmvision:platform/datastore [method]processor-store.set
 //go:noescape
-func wasmimport_ProcessorStoreSet(self0 uint32, processor0 *uint8, processor1 uint32, key0 *uint8, key1 uint32, value0 *uint8, value1 uint32, result *cm.Result[DatastoreError, struct{}, DatastoreError])
+func wasmimport_ProcessorStoreSet(self0 uint32, processor0 *uint8, processor1 uint32, key0 *uint8, key1 uint32, value0 *uint8, value1 uint32, result *cm.Result[DatastoreError, bool, DatastoreError])
