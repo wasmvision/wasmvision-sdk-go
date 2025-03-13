@@ -13,20 +13,23 @@ import (
 //
 //	enum datastore-error {
 //		success,
-//		no-such-store,
+//		no-such-frame,
+//		no-such-key,
 //		runtime-error
 //	}
 type DatastoreError uint8
 
 const (
 	DatastoreErrorSuccess DatastoreError = iota
-	DatastoreErrorNoSuchStore
+	DatastoreErrorNoSuchFrame
+	DatastoreErrorNoSuchKey
 	DatastoreErrorRuntimeError
 )
 
-var _DatastoreErrorStrings = [3]string{
+var _DatastoreErrorStrings = [4]string{
 	"success",
-	"no-such-store",
+	"no-such-frame",
+	"no-such-key",
 	"runtime-error",
 }
 
@@ -82,7 +85,7 @@ func NewFrameStore(id uint32) (result FrameStore) {
 
 // Delete represents the imported method "delete".
 //
-// Delete the tuple with the specified `key`
+// Delete the data with the specified `key` for the specified `frame`
 //
 // No error is raised if a tuple did not previously exist for `key`.
 //
@@ -94,6 +97,22 @@ func (self FrameStore) Delete(frame uint32, key string) (result cm.Result[Datast
 	frame0 := (uint32)(frame)
 	key0, key1 := cm.LowerString(key)
 	wasmimport_FrameStoreDelete((uint32)(self0), (uint32)(frame0), (*uint8)(key0), (uint32)(key1), &result)
+	return
+}
+
+// DeleteAll represents the imported method "delete-all".
+//
+// Delete all data for the specified `frame`.
+//
+// No error is raised if no data exists for the `frame`.
+//
+//	delete-all: func(frame: u32) -> result<_, datastore-error>
+//
+//go:nosplit
+func (self FrameStore) DeleteAll(frame uint32) (result cm.Result[DatastoreError, struct{}, DatastoreError]) {
+	self0 := cm.Reinterpret[uint32](self)
+	frame0 := (uint32)(frame)
+	wasmimport_FrameStoreDeleteAll((uint32)(self0), (uint32)(frame0), &result)
 	return
 }
 
@@ -113,7 +132,7 @@ func (self FrameStore) Exists(frame uint32) (result cm.Result[DatastoreError, bo
 
 // Get represents the imported method "get".
 //
-// Get the value associated with the specified `key`
+// Get the value associated with the specified `key` for the specific frame.
 //
 // Returns `ok(none)` if the key does not exist.
 //
@@ -144,7 +163,8 @@ func (self FrameStore) GetKeys(frame uint32) (result cm.List[string]) {
 
 // Set represents the imported method "set".
 //
-// Set the `value` associated with the specified `key` overwriting any existing value.
+// Set the `value` associated with the specified `key` for the specific frame
+// overwriting any existing value.
 //
 //	set: func(frame: u32, key: string, value: list<u8>) -> result<_, datastore-error>
 //
@@ -207,18 +227,33 @@ func (self ProcessorStore) Delete(processor string, key string) (result cm.Resul
 	return
 }
 
+// DeleteAll represents the imported method "delete-all".
+//
+// Delete all the data for the specified `processor`.
+//
+// No error is raised if no data exists for the `processor`.
+//
+//	delete-all: func(processor: string) -> result<_, datastore-error>
+//
+//go:nosplit
+func (self ProcessorStore) DeleteAll(processor string) (result cm.Result[DatastoreError, struct{}, DatastoreError]) {
+	self0 := cm.Reinterpret[uint32](self)
+	processor0, processor1 := cm.LowerString(processor)
+	wasmimport_ProcessorStoreDeleteAll((uint32)(self0), (*uint8)(processor0), (uint32)(processor1), &result)
+	return
+}
+
 // Exists represents the imported method "exists".
 //
 // Return whether data exists for the specified `processor`.
 //
-//	exists: func(processor: string, key: string) -> result<bool, datastore-error>
+//	exists: func(processor: string) -> result<bool, datastore-error>
 //
 //go:nosplit
-func (self ProcessorStore) Exists(processor string, key string) (result cm.Result[DatastoreError, bool, DatastoreError]) {
+func (self ProcessorStore) Exists(processor string) (result cm.Result[DatastoreError, bool, DatastoreError]) {
 	self0 := cm.Reinterpret[uint32](self)
 	processor0, processor1 := cm.LowerString(processor)
-	key0, key1 := cm.LowerString(key)
-	wasmimport_ProcessorStoreExists((uint32)(self0), (*uint8)(processor0), (uint32)(processor1), (*uint8)(key0), (uint32)(key1), &result)
+	wasmimport_ProcessorStoreExists((uint32)(self0), (*uint8)(processor0), (uint32)(processor1), &result)
 	return
 }
 
