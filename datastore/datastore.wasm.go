@@ -30,7 +30,7 @@ func wasmimport_FrameStoreExists(self0 uint32, frame0 uint32, result *cm.Result[
 
 //go:wasmimport wasmvision:platform/datastore [method]frame-store.get
 //go:noescape
-func wasmimport_FrameStoreGet(self0 uint32, frame0 uint32, key0 *uint8, key1 uint32, result *cm.Result[cm.List[uint8], cm.List[uint8], DatastoreError])
+func wasmimport_FrameStoreGet(self0 uint32, frame0 uint32, key0 *uint8, key1 uint32, result *cm.Result[string, string, DatastoreError])
 
 //go:wasmimport wasmvision:platform/datastore [method]frame-store.get-keys
 //go:noescape
@@ -62,7 +62,7 @@ func wasmimport_ProcessorStoreExists(self0 uint32, processor0 *uint8, processor1
 
 //go:wasmimport wasmvision:platform/datastore [method]processor-store.get
 //go:noescape
-func wasmimport_ProcessorStoreGet(self0 uint32, processor0 *uint8, processor1 uint32, key0 *uint8, key1 uint32, result *cm.Result[cm.List[uint8], cm.List[uint8], DatastoreError])
+func wasmimport_ProcessorStoreGet(self0 uint32, processor0 *uint8, processor1 uint32, key0 *uint8, key1 uint32, result *cm.Result[string, string, DatastoreError])
 
 //go:wasmimport wasmvision:platform/datastore [method]processor-store.get-keys
 //go:noescape

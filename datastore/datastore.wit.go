@@ -136,10 +136,10 @@ func (self FrameStore) Exists(frame uint32) (result cm.Result[DatastoreError, bo
 //
 // Returns `ok(none)` if the key does not exist.
 //
-//	get: func(frame: u32, key: string) -> result<list<u8>, datastore-error>
+//	get: func(frame: u32, key: string) -> result<string, datastore-error>
 //
 //go:nosplit
-func (self FrameStore) Get(frame uint32, key string) (result cm.Result[cm.List[uint8], cm.List[uint8], DatastoreError]) {
+func (self FrameStore) Get(frame uint32, key string) (result cm.Result[string, string, DatastoreError]) {
 	self0 := cm.Reinterpret[uint32](self)
 	frame0 := (uint32)(frame)
 	key0, key1 := cm.LowerString(key)
@@ -166,14 +166,14 @@ func (self FrameStore) GetKeys(frame uint32) (result cm.List[string]) {
 // Set the `value` associated with the specified `key` for the specific frame
 // overwriting any existing value.
 //
-//	set: func(frame: u32, key: string, value: list<u8>) -> result<_, datastore-error>
+//	set: func(frame: u32, key: string, value: string) -> result<_, datastore-error>
 //
 //go:nosplit
-func (self FrameStore) Set(frame uint32, key string, value cm.List[uint8]) (result cm.Result[DatastoreError, struct{}, DatastoreError]) {
+func (self FrameStore) Set(frame uint32, key string, value string) (result cm.Result[DatastoreError, struct{}, DatastoreError]) {
 	self0 := cm.Reinterpret[uint32](self)
 	frame0 := (uint32)(frame)
 	key0, key1 := cm.LowerString(key)
-	value0, value1 := cm.LowerList(value)
+	value0, value1 := cm.LowerString(value)
 	wasmimport_FrameStoreSet((uint32)(self0), (uint32)(frame0), (*uint8)(key0), (uint32)(key1), (*uint8)(value0), (uint32)(value1), &result)
 	return
 }
@@ -263,10 +263,10 @@ func (self ProcessorStore) Exists(processor string) (result cm.Result[DatastoreE
 //
 // Returns `ok(none)` if the key does not exist.
 //
-//	get: func(processor: string, key: string) -> result<list<u8>, datastore-error>
+//	get: func(processor: string, key: string) -> result<string, datastore-error>
 //
 //go:nosplit
-func (self ProcessorStore) Get(processor string, key string) (result cm.Result[cm.List[uint8], cm.List[uint8], DatastoreError]) {
+func (self ProcessorStore) Get(processor string, key string) (result cm.Result[string, string, DatastoreError]) {
 	self0 := cm.Reinterpret[uint32](self)
 	processor0, processor1 := cm.LowerString(processor)
 	key0, key1 := cm.LowerString(key)
@@ -292,14 +292,14 @@ func (self ProcessorStore) GetKeys(processor string) (result cm.List[string]) {
 //
 // Set the `value` associated with the specified `key` overwriting any existing value.
 //
-//	set: func(processor: string, key: string, value: list<u8>) -> result<_, datastore-error>
+//	set: func(processor: string, key: string, value: string) -> result<_, datastore-error>
 //
 //go:nosplit
-func (self ProcessorStore) Set(processor string, key string, value cm.List[uint8]) (result cm.Result[DatastoreError, struct{}, DatastoreError]) {
+func (self ProcessorStore) Set(processor string, key string, value string) (result cm.Result[DatastoreError, struct{}, DatastoreError]) {
 	self0 := cm.Reinterpret[uint32](self)
 	processor0, processor1 := cm.LowerString(processor)
 	key0, key1 := cm.LowerString(key)
-	value0, value1 := cm.LowerList(value)
+	value0, value1 := cm.LowerString(value)
 	wasmimport_ProcessorStoreSet((uint32)(self0), (*uint8)(processor0), (uint32)(processor1), (*uint8)(key0), (uint32)(key1), (*uint8)(value0), (uint32)(value1), &result)
 	return
 }

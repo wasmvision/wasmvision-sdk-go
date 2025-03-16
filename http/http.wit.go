@@ -62,10 +62,10 @@ var _HTTPErrorUnmarshalCase = cm.CaseUnmarshaler[HTTPError](_HTTPErrorStrings[:]
 // Get the content at the specified URL.
 // Returns either the content or an error.
 //
-//	get: func(url: string) -> result<list<u8>, http-error>
+//	get: func(url: string) -> result<string, http-error>
 //
 //go:nosplit
-func Get(url string) (result cm.Result[cm.List[uint8], cm.List[uint8], HTTPError]) {
+func Get(url string) (result cm.Result[string, string, HTTPError]) {
 	url0, url1 := cm.LowerString(url)
 	wasmimport_Get((*uint8)(url0), (uint32)(url1), &result)
 	return
@@ -76,11 +76,11 @@ func Get(url string) (result cm.Result[cm.List[uint8], cm.List[uint8], HTTPError
 // Post the content to the specified URL.
 // Returns either the response content or an error.
 //
-//	post: func(url: string, content-type: string, body: list<u8>) -> result<list<u8>,
+//	post: func(url: string, content-type: string, body: list<u8>) -> result<string,
 //	http-error>
 //
 //go:nosplit
-func Post(url string, contentType string, body cm.List[uint8]) (result cm.Result[cm.List[uint8], cm.List[uint8], HTTPError]) {
+func Post(url string, contentType string, body cm.List[uint8]) (result cm.Result[string, string, HTTPError]) {
 	url0, url1 := cm.LowerString(url)
 	contentType0, contentType1 := cm.LowerString(contentType)
 	body0, body1 := cm.LowerList(body)
@@ -102,10 +102,10 @@ func Post(url string, contentType string, body cm.List[uint8]) (result cm.Result
 // Mat is the reference to to the Mat to use.
 //
 //	post-image: func(url: string, content-type: string, request-template: list<u8>,
-//	response-item: string, mat: u32) -> result<list<u8>, http-error>
+//	response-item: string, mat: u32) -> result<string, http-error>
 //
 //go:nosplit
-func PostImage(url string, contentType string, requestTemplate cm.List[uint8], responseItem string, mat uint32) (result cm.Result[cm.List[uint8], cm.List[uint8], HTTPError]) {
+func PostImage(url string, contentType string, requestTemplate cm.List[uint8], responseItem string, mat uint32) (result cm.Result[string, string, HTTPError]) {
 	url0, url1 := cm.LowerString(url)
 	contentType0, contentType1 := cm.LowerString(contentType)
 	requestTemplate0, requestTemplate1 := cm.LowerList(requestTemplate)
